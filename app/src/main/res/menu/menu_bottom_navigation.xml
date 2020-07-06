@@ -4,17 +4,27 @@
 
     <item
         android:id="@+id/action_home"
-        android:icon="@android:drawable/ic_menu_compass"
+        android:icon="@drawable/ic_home"
         android:title="Home"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_compose"
-        android:icon="@android:drawable/ic_menu_edit"
-        android:title="Compose"
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:title="Search"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_capture"
+        android:icon="@drawable/ic_capture"
+        android:title="Capture"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_likes"
+        android:icon="@drawable/ic_likes"
+        android:title="Likes"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_profile"
-        android:icon="@drawable/ic_baseline_person_24"
+        android:icon="@drawable/ic_profile"
         android:title="Profile"
         app:showAsAction="always" />
 </menu>
