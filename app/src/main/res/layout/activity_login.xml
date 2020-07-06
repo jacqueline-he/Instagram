@@ -24,6 +24,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_weight="1"
+        android:textCursorDrawable="@drawable/cursor"
+        android:theme="@style/EditTextTheme"
+        android:width="4dp"
         android:hint="username" />
 
     <EditText
@@ -33,13 +36,28 @@
         android:ems="10"
         android:layout_weight="1"
         android:inputType="textPassword"
+        android:textCursorDrawable="@drawable/cursor"
+        android:theme="@style/EditTextTheme"
         android:hint="password" />
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/blue"
+        android:textColor="@color/white"
         android:text="Login"/>
+
+    <Button
+        android:id="@+id/btnSignup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp"
+        android:backgroundTint="@color/green"
+        android:textColor="@color/white"
+        android:text="Sign up"/>
 
 
 
