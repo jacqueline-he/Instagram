@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         tools:text="username" />
@@ -46,6 +46,7 @@
         android:layout_marginStart="155dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:gravity="end"
         android:layout_toEndOf="@+id/tvUsername"
         tools:text="11/23/2020" />
 
@@ -55,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvLikes"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="0dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_likes"
         app:borderWidth="0dp"
@@ -95,9 +96,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="20dp"
         tools:text="this is a caption" />
 
     <TextView
@@ -107,7 +108,7 @@
         android:layout_below="@+id/ivPostImage"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
         tools:text="20 likes" />
 </RelativeLayout>

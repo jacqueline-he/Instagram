@@ -10,6 +10,8 @@ import android.text.format.DateUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
@@ -51,15 +53,17 @@ public class PostDetailActivity extends AppCompatActivity {
         tvUsername.setText(post.getUser().getUsername());
         tvCaption.setText(post.getDescription());
         tvDate.setText(getRelativeTimeAgo(post.getCreatedAt().toString()));
+        tvLikes.setText(String.format("%d", post.getLikes()) + " likes");
 
-        ParseFile file = post.getImage();
-        file.getDataInBackground(new GetDataCallback() {
-            @Override
-            public void done(byte[] data, ParseException e) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                ivPostImage.setImageBitmap(bitmap);
-            }
-        });
+        ParseFile profileImage = post.getUser().getParseFile("profilepic");
+        if (profileImage != null) {
+            Glide.with(this).load(profileImage.getUrl()).transform(new CircleCrop()).into(ivProfileImage);
+        }
+
+
+        ParseFile postImage = post.getImage();
+        if (postImage != null)
+            Glide.with(this).load(postImage.getUrl()).into(ivPostImage);
 
 
     }

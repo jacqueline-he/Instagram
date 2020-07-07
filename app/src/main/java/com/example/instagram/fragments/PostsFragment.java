@@ -23,6 +23,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -33,6 +34,9 @@ public class PostsFragment extends Fragment {
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
     private SwipeRefreshLayout swipeContainer;
+    private EndlessRecyclerViewScrollListener scrollListener;
+    private LinearLayoutManager linearLayoutManager;
+    boolean infScroll = false;
 
     public PostsFragment() {
         // Required empty public constructor
@@ -56,13 +60,25 @@ public class PostsFragment extends Fragment {
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(getContext(), allPosts);
 
+        linearLayoutManager = new LinearLayoutManager(getContext());
         rvPosts.setAdapter(adapter);
-        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvPosts.setLayoutManager(linearLayoutManager);
+
+        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                infScroll = true;
+                Log.i(TAG, "Asking for inf scroll posts");
+                queryPosts();
+            }
+        };
+        rvPosts.addOnScrollListener(scrollListener);
 
         swipeToRefresh();
         // adapter.clear();
         queryPosts();
     }
+
 
     private void swipeToRefresh() {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -83,7 +99,7 @@ public class PostsFragment extends Fragment {
 
     protected void queryPosts() {
         // Specify which class to query
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        /*ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
         query.setLimit(20);
         query.addDescendingOrder("createdAt");
@@ -100,6 +116,35 @@ public class PostsFragment extends Fragment {
                 allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
             }
+        });*/
+
+        ParseQuery<Post> query = new ParseQuery<Post>(Post.class);
+        query.include(Post.KEY_USER);
+
+        if (infScroll && allPosts.size() > 0) {
+            Date oldest = allPosts.get(allPosts.size() - 1).getCreatedAt();
+            Log.i(TAG, "Getting inf scroll posts");
+            query.whereLessThan("createdAt", oldest);
+            infScroll = false;
+        }
+
+        query.setLimit(20);
+        query.addDescendingOrder("createdAt");
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+                for (Post post : posts) {
+                    Log.i(TAG, "Post: " + post.getDescription()+ " , username: " + post.getUser().getUsername());
+                }
+                allPosts.addAll(posts);
+                adapter.notifyDataSetChanged();
+            }
         });
+
+
     }
 }
