@@ -15,7 +15,7 @@ The following **required** functionality is completed:
 - [x] User can take a photo, add a caption, and post it to "Instagram"
 - [x] User can view the last 20 posts submitted to "Instagram"
 - [x] User can pull to refresh the last 20 posts submitted to "Instagram"
-- [ ] User can tap a post to view post details, including timestamp and caption.
+- [x] User can tap a post to view post details, including timestamp and caption.
 
 The following **stretch** features are implemented:
 
@@ -33,7 +33,7 @@ The following **stretch** features are implemented:
 - [ ] User can comment on a post and see all comments for each post in the post details screen.
 - [ ] User can like a post and see number of likes for each post in the post details screen.
 - [ ] Create a custom Camera View on your phone.
-- [ ] Run your app on your phone and use the camera to take the photo
+- [x] Run your app on your phone and use the camera to take the photo
 
 The following **additional** features are implemented:
 
