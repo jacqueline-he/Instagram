@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="180dp"
+        android:layout_width="220dp"
         android:layout_gravity="center"
         android:layout_marginTop="150dp"
         android:layout_height="wrap_content"
@@ -26,17 +26,20 @@
         android:layout_weight="1"
         android:textCursorDrawable="@drawable/cursor"
         android:theme="@style/EditTextTheme"
+        android:background="@drawable/edit_text_background"
         android:width="4dp"
         android:hint="username" />
 
     <EditText
         android:id="@+id/etPassword"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_weight="1"
         android:inputType="textPassword"
         android:textCursorDrawable="@drawable/cursor"
+        android:background="@drawable/edit_text_background"
         android:theme="@style/EditTextTheme"
         android:hint="password" />
     <Button
