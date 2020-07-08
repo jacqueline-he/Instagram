@@ -35,6 +35,7 @@ import java.util.List;
 public class ProfileFragment extends Fragment {
     public static final String TAG="ProfileFragment";
     private ImageView ivLogout;
+    private ImageView ivCamera;
     private RecyclerView rvPosts;
     protected ProfileAdapter adapter;
     protected List<Post> userPosts;
@@ -60,12 +61,21 @@ public class ProfileFragment extends Fragment {
         currentUser = ParseUser.getCurrentUser();
         tvUsername = view.findViewById(R.id.tvUsername);
         ivProfileImage = view.findViewById(R.id.ivProfileImage);
+        ivCamera = view.findViewById(R.id.ivCamera);
 
         ivLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ParseUser.logOut();
                 startActivity(new Intent(getContext(), LoginActivity.class));
+            }
+        });
+
+        ivCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Allow the logged in user to add a profile photo
+
             }
         });
 

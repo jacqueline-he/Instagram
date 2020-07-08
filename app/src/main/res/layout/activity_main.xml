@@ -20,8 +20,20 @@
       android:layout_height="match_parent"
       android:layout_above="@+id/bottomNavigation"
       >
-
   </FrameLayout>
+
+  <Button
+      android:id="@+id/btnCapture"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignBottom="@+id/flContainer"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="24dp"
+      android:visibility="gone"
+      android:clickable="true"
+      android:background="@color/white"
+      android:text="Take Picture"
+      android:focusable="true" />
 
   <com.google.android.material.bottomnavigation.BottomNavigationView
       android:id="@+id/bottomNavigation"
