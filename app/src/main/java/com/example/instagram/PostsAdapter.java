@@ -98,6 +98,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             tvDate = itemView.findViewById(R.id.tvDate);
             tvLikes = itemView.findViewById(R.id.tvLikes);
+
+            fabFavorite = itemView.findViewById(R.id.fabFavorite);
+            fabComment = itemView.findViewById(R.id.fabComment);
+            fabMessage = itemView.findViewById(R.id.fabMessage);
+
             itemView.setOnClickListener(this);
         }
 
@@ -107,7 +112,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         public void bind(Post post) {
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
-            tvLikes.setText(String.format("%d", post.getLikes()) + " likes");
+            if (post.getLikes().intValue() > 0)
+                tvLikes.setText(String.format("%d", post.getLikes()) + " likes");
+            else
+                tvLikes.setVisibility(View.GONE);
             tvDate.setText(getRelativeTimeAgo(post.getCreatedAt().toString()));
 
 
@@ -116,10 +124,19 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Glide.with(context).load(profileImage.getUrl()).transform(new CircleCrop()).into(ivProfileImage);
             }
 
-
             ParseFile postImage = post.getImage();
             if (postImage != null)
                 Glide.with(context).load(postImage.getUrl()).into(ivPostImage);
+
+            fabFavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+
+                    }
+                }
+            });
         }
 
         @Override

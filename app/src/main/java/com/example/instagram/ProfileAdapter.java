@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
@@ -69,7 +70,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         public void bind(Post post) {
             ParseFile postImage = post.getImage();
             if (postImage != null)
-                Glide.with(context).load(postImage.getUrl()).into(ivPostImage);
+                Glide.with(context).load(postImage.getUrl()).apply(new RequestOptions().override(100, 100)).into(ivPostImage);
         }
     }
 }

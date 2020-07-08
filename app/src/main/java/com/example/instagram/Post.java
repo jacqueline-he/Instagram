@@ -13,6 +13,10 @@ public class Post extends ParseObject {
     public static final String KEY_USER = "user";
     public static final String KEY_LIKES = "likes";
 
+    public Post() {
+        super();
+    }
+
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
     }
@@ -37,11 +41,11 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
-    public int getLikes() {
+    public Number getLikes() {
         return getInt(KEY_LIKES);
     }
 
-    public void setLikes(int likes) {
+    public void setLikes(Number likes) {
         put(KEY_LIKES, likes);
     }
 
