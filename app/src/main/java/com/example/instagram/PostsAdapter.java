@@ -3,7 +3,9 @@ package com.example.instagram;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +13,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.example.instagram.fragments.OtherUserFragment;
+import com.example.instagram.fragments.ProfileFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.ParseFile;
+import com.parse.ParseUser;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
@@ -109,7 +119,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
 
         @SuppressLint({"SetTextI18n", "DefaultLocale"})
-        public void bind(Post post) {
+        public void bind(final Post post) {
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
             if (post.getLikes().intValue() > 0)
@@ -123,6 +133,51 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             if (profileImage != null) {
                 Glide.with(context).load(profileImage.getUrl()).transform(new CircleCrop()).into(ivProfileImage);
             }
+
+
+
+
+            ivProfileImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ParseUser currentUser = ParseUser.getCurrentUser();
+                    FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
+                    if (post.getUser().getUsername().equals(currentUser.getUsername())) {
+                        fm.beginTransaction().replace(R.id.flContainer, new ProfileFragment()).commit();
+                        ((MainActivity) context).bottomNavigationView.setSelectedItemId(R.id.action_profile);
+                    }
+                    else {
+                        Fragment fragment = new OtherUserFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Post", post);
+                        fragment.setArguments(bundle);
+                        fm.beginTransaction().replace(R.id.flContainer, fragment).commit();
+                    }
+                }
+            });
+
+            tvUsername.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ParseUser currentUser = ParseUser.getCurrentUser();
+                    FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
+                    if (post.getUser().getUsername().equals(currentUser.getUsername())) {
+                        fm.beginTransaction().replace(R.id.flContainer, new ProfileFragment()).commit();
+                        ((MainActivity) context).bottomNavigationView.setSelectedItemId(R.id.action_profile);
+                    }
+                    else {
+                        Fragment fragment = new OtherUserFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Post", post);
+                        fragment.setArguments(bundle);
+                        fm.beginTransaction().replace(R.id.flContainer, fragment).commit();
+                    }
+                }
+            });
+
+
+
+
 
             ParseFile postImage = post.getImage();
             if (postImage != null)
@@ -145,7 +200,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             if (position != RecyclerView.NO_POSITION) {
                 Post post = posts.get(position);
                 Intent intent = new Intent(context, PostDetailActivity.class);
-                intent.putExtra("PostDetails", post);
+                intent.putExtra("PostDetails", (Serializable) post);
                 context.startActivity(intent);
             }
         }
