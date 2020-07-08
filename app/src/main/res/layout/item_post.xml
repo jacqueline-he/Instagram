@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="0dp">
 
     <ImageView
         android:id="@+id/ivPostImage"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         android:layout_below="@+id/tvUsername"
         android:layout_alignParentStart="true"
@@ -24,7 +25,7 @@
         android:clickable="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         tools:srcCompat="@tools:sample/avatars"
         android:focusable="true" />
@@ -52,6 +53,7 @@
         android:layout_marginStart="155dp"
         android:gravity="end"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:textColor = "@color/black"
         android:layout_toEndOf="@+id/tvUsername"
         tools:text="11/23/2020" />
@@ -100,9 +102,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/fabFavorite"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginEnd="2dp"
         tools:text="this is a caption" />
 
@@ -113,7 +115,7 @@
         android:layout_below="@+id/ivPostImage"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="0dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
         tools:text="20 likes" />
 </RelativeLayout>

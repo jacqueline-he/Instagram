@@ -11,10 +11,12 @@
         android:id="@+id/ivPostImage"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:layout_below="@+id/tvUsername"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="6dp"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <ImageView
@@ -35,6 +37,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:layout_toEndOf="@+id/ivProfileImage"
+        android:textColor = "@color/black"
+        android:textStyle="bold"
         tools:text="username" />
 
     <TextView
@@ -46,6 +50,7 @@
         android:layout_marginStart="155dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:textColor = "@color/black"
         android:gravity="end"
         android:layout_toEndOf="@+id/tvUsername"
         tools:text="11/23/2020" />
