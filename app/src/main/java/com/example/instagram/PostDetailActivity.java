@@ -143,6 +143,15 @@ public class PostDetailActivity extends AppCompatActivity {
                 tvLikes.setText(String.format("%d", post.getLikes().length()) + " likes");
             }});
 
+        fabComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PostDetailActivity.this, CommentActivity.class);
+                intent.putExtra("post", (Serializable) post);
+                PostDetailActivity.this.startActivity(intent);
+            }
+        });
+
 
             populateComments();
 
@@ -152,8 +161,8 @@ public class PostDetailActivity extends AppCompatActivity {
         ParseQuery<Comment> query = new ParseQuery<>(Comment.class);
         // query.whereEqualTo("post_id", post.getObjectId());
         // query.include("user");
-        // query.include(Comment.KEY_POST);
-        // query.addDescendingOrder("createdAt");
+        query.whereEqualTo("post", post);
+        query.addDescendingOrder("createdAt");
         query.findInBackground(new FindCallback<Comment>() {
             @Override
             public void done(List<Comment> objects, ParseException e) {

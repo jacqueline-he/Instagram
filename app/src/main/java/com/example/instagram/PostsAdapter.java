@@ -190,6 +190,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
 
 
+            fabComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, CommentActivity.class);
+                    intent.putExtra("post", (Serializable) post);
+                    context.startActivity(intent);
+                }
+            });
+
 
 
             ParseFile postImage = post.getImage();
