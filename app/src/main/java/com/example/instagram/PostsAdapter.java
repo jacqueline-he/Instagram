@@ -27,6 +27,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
+import org.json.JSONException;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -122,10 +124,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         public void bind(final Post post) {
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
-            if (post.getLikes().intValue() > 0)
-                tvLikes.setText(String.format("%d", post.getLikes()) + " likes");
-            else
-                tvLikes.setVisibility(View.GONE);
             tvDate.setText(getRelativeTimeAgo(post.getCreatedAt().toString()));
 
 
@@ -134,7 +132,22 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Glide.with(context).load(profileImage.getUrl()).transform(new CircleCrop()).into(ivProfileImage);
             }
 
+            int likes = post.getLikes().length();
+            try {
+                if (post.isLiked()) {
+                    fabFavorite.setColorFilter(context.getResources().getColor(R.color.medium_red));
+                }
+                else {
+                    fabFavorite.clearColorFilter();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
+            if (likes == 1)
+                tvLikes.setText(String.format("%d", 1) + " like");
+            else
+                tvLikes.setText(String.format("%d", likes) + " likes");
 
 
             ivProfileImage.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +201,26 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 public void onClick(View view) {
                     final int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
+                        Post post = posts.get(position);
+                        try {
+                            if (post.isLiked()) {
+                                post.unlikePost();
+                                fabFavorite.clearColorFilter();
 
+                            }
+                            else {
+                                post.likePost();
+                                Log.d("PostsAdapter", "in here!!!!!!!!!");
+                                fabFavorite.setColorFilter(context.getResources().getColor(R.color.medium_red));
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        post.saveInBackground();
+                        tvLikes.setText(String.format("%d", post.getLikes().length()) + " likes");
+                        tvLikes.setVisibility(View.VISIBLE);
                     }
                 }
             });

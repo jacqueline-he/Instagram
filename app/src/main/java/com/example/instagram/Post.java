@@ -5,7 +5,11 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @ParseClassName("Post")
 public class Post extends ParseObject implements Serializable {
@@ -43,12 +47,30 @@ public class Post extends ParseObject implements Serializable {
         put(KEY_USER, user);
     }
 
-    public Number getLikes() {
-        return getInt(KEY_LIKES);
+    public JSONArray getLikes() {
+        JSONArray arr = getJSONArray(KEY_LIKES);
+        if (arr == null)
+            return new JSONArray();
+        return arr;
     }
 
-    public void setLikes(Number likes) {
-        put(KEY_LIKES, likes);
+    public void likePost() {
+        add(KEY_LIKES, ParseUser.getCurrentUser());
+    }
+
+    public void unlikePost() {
+        ArrayList<ParseUser> user = new ArrayList<ParseUser>();
+        user.add(ParseUser.getCurrentUser());
+        removeAll(KEY_LIKES, user);
+    }
+
+    public boolean isLiked() throws JSONException {
+        JSONArray arr = getLikes();
+        for (int i = 0; i < arr.length(); i++) {
+            if (arr.getJSONObject(i).getString("objectId").equals(ParseUser.getCurrentUser().getObjectId()))
+                return true;
+        }
+        return false;
     }
 
 }
