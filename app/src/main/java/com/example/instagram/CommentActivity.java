@@ -9,10 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -27,8 +31,9 @@ public class CommentActivity extends AppCompatActivity {
     private RecyclerView rvComments;
     private List<Comment> comments;
     private CommentsAdapter adapter;
-    private TextView tvCaption;
+    private TextView tvContent;
     private TextView tvUsername;
+    private ImageView ivProfileImage;
     private Post post;
 
     @Override
@@ -40,16 +45,27 @@ public class CommentActivity extends AppCompatActivity {
         etComment = findViewById(R.id.etComment);
         rvComments = findViewById(R.id.rvComments);
 
-        tvCaption = findViewById(R.id.tvCaption);
+        tvContent = findViewById(R.id.tvContent);
         tvUsername = findViewById(R.id.tvUsername);
 
+        ivProfileImage = findViewById(R.id.ivProfileImage);
         comments = new ArrayList<>();
         adapter = new CommentsAdapter(this, comments);
 
         post = (Post) getIntent().getSerializableExtra("post");
         tvUsername.setText(post.getUser().getUsername());
-        tvCaption.setText(post.getDescription());
+        tvContent.setText(post.getDescription());
 
+        ParseFile profileImage = null;
+        try {
+            profileImage = post.getUser().fetchIfNeeded().getParseFile("profilepic");
+            if (profileImage != null) {
+                String url = profileImage.getUrl();
+                Glide.with(this).load(url).transform(new CircleCrop()).into(ivProfileImage);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
 
         rvComments.setAdapter(adapter);

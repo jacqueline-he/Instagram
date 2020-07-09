@@ -135,9 +135,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             int likes = post.getLikes().length();
             try {
                 if (post.isLiked()) {
+                    fabFavorite.setImageResource(R.drawable.ic_likes_filled);
                     fabFavorite.setColorFilter(context.getResources().getColor(R.color.medium_red));
                 }
                 else {
+                    fabFavorite.setImageResource(R.drawable.ic_likes);
                     fabFavorite.clearColorFilter();
                 }
             } catch (JSONException e) {
@@ -215,11 +217,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                             if (post.isLiked()) {
                                 post.unlikePost();
                                 fabFavorite.clearColorFilter();
-
+                                fabFavorite.setImageResource(R.drawable.ic_likes);
                             }
                             else {
                                 post.likePost();
                                 Log.d("PostsAdapter", "in here!!!!!!!!!");
+                                fabFavorite.setImageResource(R.drawable.ic_likes_filled);
                                 fabFavorite.setColorFilter(context.getResources().getColor(R.color.medium_red));
 
                             }

@@ -88,10 +88,13 @@ public class PostDetailActivity extends AppCompatActivity {
         int likes = post.getLikes().length();
         try {
             if (post.isLiked()) {
+                fabFavorite.setImageResource(R.drawable.ic_likes_filled);
                 fabFavorite.setColorFilter(getResources().getColor(R.color.medium_red));
             }
             else {
                 fabFavorite.clearColorFilter();
+                fabFavorite.setImageResource(R.drawable.ic_likes);
+
             }
             needsUpdate = true;
         } catch (JSONException e) {

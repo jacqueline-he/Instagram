@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.instagram.MainActivity;
 import com.example.instagram.Post;
 import com.example.instagram.R;
@@ -33,6 +35,8 @@ import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import org.json.JSONArray;
 
 import java.io.File;
 import java.util.List;
@@ -84,11 +88,11 @@ public class ComposeFragment extends Fragment {
 
 
         // by this point we have the camera photo on disk
-        Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+        // Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
         // RESIZE BITMAP, see section below
         // Load the taken image into a preview
-        ivPostImage.setImageBitmap(takenImage);
-
+        // ivPostImage.setImageBitmap(takenImage);
+        Glide.with(this).load(photoFile.getAbsolutePath()).into(ivPostImage);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,12 +125,14 @@ public class ComposeFragment extends Fragment {
         post.setDescription(description);
         post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);
+        post.setLikes(new JSONArray());
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Error while saving", e);
                     Toast.makeText(getContext(), "Error while saving!", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
                 Log.i(TAG, "Post save was successful!");
                 etDescription.setText("");

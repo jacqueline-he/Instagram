@@ -54,6 +54,10 @@ public class Post extends ParseObject implements Serializable {
         return arr;
     }
 
+    public void setLikes(JSONArray arr) {
+        put("likes", arr);
+    }
+
     public void likePost() {
         add(KEY_LIKES, ParseUser.getCurrentUser());
     }
