@@ -108,11 +108,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/fabFavorite"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
-        android:layout_marginBottom="20dp"
         tools:text="this is a caption" />
 
     <TextView
@@ -125,4 +123,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
         tools:text="20 likes" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvComments"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCaption" />
+
 </RelativeLayout>

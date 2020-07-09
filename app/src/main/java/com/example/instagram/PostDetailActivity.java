@@ -1,6 +1,9 @@
 package com.example.instagram;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -15,14 +18,21 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.example.instagram.fragments.PostsFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.FindCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import org.json.JSONException;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class PostDetailActivity extends AppCompatActivity {
@@ -38,6 +48,12 @@ public class PostDetailActivity extends AppCompatActivity {
     private FloatingActionButton fabMessage;
     private Post post;
 
+    private RecyclerView rvComments;
+    private List<Comment> comments;
+    private CommentsAdapter adapter;
+
+    boolean needsUpdate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +68,14 @@ public class PostDetailActivity extends AppCompatActivity {
         fabFavorite = findViewById(R.id.fabFavorite);
         fabComment = findViewById(R.id.fabComment);
         fabMessage = findViewById(R.id.fabMessage);
+        rvComments = findViewById(R.id.rvComments);
+        comments = new ArrayList<>();
+        adapter = new CommentsAdapter(this, comments);
+        rvComments.setAdapter(adapter);
+
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rvComments.setLayoutManager(linearLayoutManager);
+
 
         Intent intent = getIntent();
         post = (Post) intent.getExtras().get("PostDetails");
@@ -69,6 +93,7 @@ public class PostDetailActivity extends AppCompatActivity {
             else {
                 fabFavorite.clearColorFilter();
             }
+            needsUpdate = true;
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -107,13 +132,38 @@ public class PostDetailActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                post.saveInBackground();
+                post.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e != null) {
+                            Log.e("PostDetailActivity", "Error while saving", e);
+                        }
+                    }
+                });
                 tvLikes.setText(String.format("%d", post.getLikes().length()) + " likes");
-                tvLikes.setVisibility(View.VISIBLE);
             }});
 
 
+            populateComments();
 
+    }
+
+    private void populateComments() {
+        ParseQuery<Comment> query = new ParseQuery<>(Comment.class);
+        // query.whereEqualTo("post_id", post.getObjectId());
+        // query.include("user");
+        // query.include(Comment.KEY_POST);
+        // query.addDescendingOrder("createdAt");
+        query.findInBackground(new FindCallback<Comment>() {
+            @Override
+            public void done(List<Comment> objects, ParseException e) {
+                if (e == null) {
+                    adapter.addAll(objects);
+                    adapter.notifyItemInserted(0);
+                    rvComments.scrollToPosition(0);
+                }
+            }
+        });
 
     }
 
