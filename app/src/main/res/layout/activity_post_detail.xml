@@ -16,8 +16,10 @@
         android:layout_below="@+id/tvUsername"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
+        android:clickable="true"
         android:layout_marginTop="6dp"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/ivProfileImage"

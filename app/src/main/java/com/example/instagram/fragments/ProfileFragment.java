@@ -1,9 +1,6 @@
 package com.example.instagram.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -28,9 +25,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.instagram.LoginActivity;
-import com.example.instagram.Post;
-import com.example.instagram.PostsAdapter;
-import com.example.instagram.ProfileAdapter;
+import com.example.instagram.models.Post;
+import com.example.instagram.adapters.ProfileAdapter;
 import com.example.instagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;

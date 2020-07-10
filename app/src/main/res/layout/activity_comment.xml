@@ -76,6 +76,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="3dp"
         android:layout_marginBottom="3dp"
+        android:background="@drawable/button_border"
+        android:textColor="@color/medium_red"
         android:text="Submit" />
 
 </RelativeLayout>

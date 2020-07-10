@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.example.instagram.adapters.CommentsAdapter;
+import com.example.instagram.models.Comment;
+import com.example.instagram.models.Post;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;

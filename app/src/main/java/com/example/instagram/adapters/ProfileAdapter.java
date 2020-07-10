@@ -1,4 +1,4 @@
-package com.example.instagram;
+package com.example.instagram.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,16 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.instagram.PostDetailActivity;
+import com.example.instagram.R;
+import com.example.instagram.models.Post;
 import com.parse.ParseFile;
-import com.parse.ParseUser;
 
 import java.io.Serializable;
 import java.util.List;

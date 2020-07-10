@@ -135,6 +135,12 @@ public class MainActivity extends AppCompatActivity {
         return new File(mediaStorageDir.getPath() + File.separator + fileName);
     }
 
+    @Override
+    public void onBackPressed() {
+        Log.d(TAG, "backpressed");
+        fragment = new PostsFragment();
+        fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -166,11 +172,10 @@ public class MainActivity extends AppCompatActivity {
             allPosts.remove(position);
             allPosts.add(position, post);
             adapter.notifyItemChanged(position);*/
-            // ((PostsFragment)fragment).getAdapter().clear();
-            // ((PostsFragment)fragment).queryPosts();
-            int position = ((PostsFragment)fragment).getAdapter().detailPosition;
             ((PostsFragment)fragment).getAdapter().clear();
             ((PostsFragment)fragment).queryPosts();
+            // int position = ((PostsFragment)fragment).getAdapter().detailPosition;
+            // ((PostsFragment)fragment).getAdapter().notifyItemChanged(position);
         }
     }
 }
