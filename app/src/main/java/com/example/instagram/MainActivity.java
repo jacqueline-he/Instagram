@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
                         // fragment = new ComposeFragment();
                         if (!btnClicked)
                             btnCapture.setVisibility(View.VISIBLE);
+                        else
+                            btnCapture.setVisibility(View.GONE);
+                        btnClicked = !btnClicked;
                         break;
                     case R.id.action_profile:
                     default:

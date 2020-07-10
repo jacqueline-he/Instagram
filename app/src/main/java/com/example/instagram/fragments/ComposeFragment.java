@@ -3,6 +3,7 @@ package com.example.instagram.fragments;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -88,11 +89,12 @@ public class ComposeFragment extends Fragment {
 
 
         // by this point we have the camera photo on disk
-        // Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+        Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
         // RESIZE BITMAP, see section below
         // Load the taken image into a preview
         // ivPostImage.setImageBitmap(takenImage);
-        Glide.with(this).load(photoFile.getAbsolutePath()).into(ivPostImage);
+        ivPostImage.setImageBitmap(rotateBitmap(takenImage, 90));
+        // Glide.with(this).load(photoFile.getAbsolutePath()).into(ivPostImage);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +117,12 @@ public class ComposeFragment extends Fragment {
 
     }
 
-
+    public static Bitmap rotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+    }
 
 
 

@@ -56,10 +56,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
+        android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="5dp"
         android:layout_toStartOf="@+id/btnSend"
+        android:layout_weight="1"
+        android:textCursorDrawable="@drawable/cursor"
+        android:theme="@style/EditTextTheme"
+        android:background="@drawable/edit_text_background"
+        android:width="4dp"
         android:ems="10"
         android:inputType="textMultiLine|textPersonName" />
 

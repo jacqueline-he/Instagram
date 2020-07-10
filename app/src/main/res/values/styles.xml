@@ -9,4 +9,8 @@
         <item name="colorControlActivated">@color/pink</item>
     </style>
 
+    <style name="ProgressBarStyle">
+        <item name="colorAccent">@color/white</item>
+    </style>
+
 </resources>
