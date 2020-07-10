@@ -1,5 +1,6 @@
 package com.example.instagram.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -122,7 +123,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                launchCamera();
-
             }
         });
 
@@ -143,7 +143,7 @@ public class ProfileFragment extends Fragment {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference for future access
-        photoFile = getPhotoFileUri(photoFileName);
+        photoFile = getPhotoFileUri(photoFileName + Math.random());
 
         // wrap File object into a content provider
         // required for API >= 24
@@ -183,10 +183,11 @@ public class ProfileFragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 // Bitmap taken = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
                 // ivProfileImage.setImageBitmap(taken);
-                Glide.with(this).load(photoFile.getAbsolutePath()).transform(new CircleCrop()).into(ivProfileImage);
+
                 ParseFile file = new ParseFile(photoFile);
                 currentUser.put("profilepic", file);
                 currentUser.saveInBackground();
+                Glide.with(this).load(photoFile.getAbsolutePath()).transform(new CircleCrop()).into(ivProfileImage);
             } else { // Result was a failure
                 Toast.makeText(getActivity(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }

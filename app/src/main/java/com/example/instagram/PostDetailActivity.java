@@ -123,11 +123,13 @@ public class PostDetailActivity extends AppCompatActivity {
                 try {
                     if (post.isLiked()) {
                         post.unlikePost();
+                        fabFavorite.setImageResource(R.drawable.ic_likes);
                         fabFavorite.clearColorFilter();
 
                     }
                     else {
                         post.likePost();
+                        fabFavorite.setImageResource(R.drawable.ic_likes_filled);
                         fabFavorite.setColorFilter(getResources().getColor(R.color.medium_red));
 
                     }
