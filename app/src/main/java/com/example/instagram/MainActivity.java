@@ -159,19 +159,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (requestCode == 230) {
-            /*Post post = (Post) data.getParcelableExtra("post");
-            String objID = post.getObjectId();
-            int position = 0;
-            List<Post> allPosts = ((PostsFragment)fragment).getPosts();
-            PostsAdapter adapter = ((PostsFragment)fragment).getAdapter();
-            for (int i = 0; i < allPosts.size(); i++) {
-                if (objID.equals(allPosts.get(position).getObjectId()))
-                    position = i;
-            }
-            Log.d(TAG, "likes: " + post.getLikes());
-            allPosts.remove(position);
-            allPosts.add(position, post);
-            adapter.notifyItemChanged(position);*/
             ((PostsFragment)fragment).getAdapter().clear();
             ((PostsFragment)fragment).queryPosts();
             // int position = ((PostsFragment)fragment).getAdapter().detailPosition;

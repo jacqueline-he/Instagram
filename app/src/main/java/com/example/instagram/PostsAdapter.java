@@ -238,7 +238,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             }
             else {
                 post.likePost();
-                Log.d("PostsAdapter", "in here!!!!!!!!!");
                 fabFavorite.setImageResource(R.drawable.ic_likes_filled);
                 fabFavorite.setColorFilter(context.getResources().getColor(R.color.medium_red));
 

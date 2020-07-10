@@ -2,7 +2,7 @@
 
 **Instagram** is a photo sharing app using Parse as its backend.
 
-Time spent: **X** hours spent in total
+Time spent: **20** hours spent in total
 
 ## User Stories
 
@@ -81,7 +81,7 @@ After snapping a pic, the user adds a caption and posts it to "Instagram". As th
 Parse, an indeterminate progress bar appears over the photo. The user can also take a picture using the camera
 icon in the home feed screen. 
 
-<img src='4.gif' title='Video 4' width='400' alt='Video 3' />
+<img src='4.gif' title='Video 4' width='400' alt='Video 4' />
 
 For Video 4, the user can pull to refresh to view new posts submitted to Instagram by other users. The user then
 scrolls to the bottom of the feed where more posts are loaded using infinite scrolling (20 posts are loaded with
