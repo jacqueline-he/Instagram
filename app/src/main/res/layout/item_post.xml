@@ -110,6 +110,7 @@
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/fabFavorite"
+        android:textColor="@color/black"
         android:layout_alignParentStart="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
