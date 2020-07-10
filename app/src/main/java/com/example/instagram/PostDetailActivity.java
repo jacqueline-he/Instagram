@@ -158,7 +158,7 @@ public class PostDetailActivity extends AppCompatActivity {
         });
 
 
-            populateComments();
+            // populateComments();
 
     }
 
@@ -196,5 +196,15 @@ public class PostDetailActivity extends AppCompatActivity {
         }
 
         return relativeDate;
+    }
+
+    @Override
+    public void onResume()
+    {  // After a pause OR at startup
+        super.onResume();
+        //Refresh your stuff here
+        adapter.clear();
+        populateComments();
+        Log.d("PostDetailActivity", "Got here after comment");
     }
 }

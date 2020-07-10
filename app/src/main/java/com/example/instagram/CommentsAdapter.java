@@ -65,6 +65,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
 
     // Add a list of items -- change to type used
     public void addAll(List<Comment> list) {
+        // comments.clear();
         comments.addAll(list);
         notifyDataSetChanged();
     }
