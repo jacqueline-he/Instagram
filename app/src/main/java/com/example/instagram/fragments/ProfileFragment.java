@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +37,7 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -54,6 +57,9 @@ public class ProfileFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private ParseUser currentUser;
     private TextView tvUsername;
+    private TextView tvBio;
+    private EditText etBio;
+    private Button btnUpdate;
     private ImageView ivProfileImage;
     private EndlessRecyclerViewScrollListener scrollListener;
     boolean infScroll = false;
@@ -78,6 +84,9 @@ public class ProfileFragment extends Fragment {
         currentUser = ParseUser.getCurrentUser();
         tvUsername = view.findViewById(R.id.tvUsername);
         ivProfileImage = view.findViewById(R.id.ivProfileImage);
+        tvBio = view.findViewById(R.id.tvBio);
+        etBio = view.findViewById(R.id.etBio);
+        btnUpdate = view.findViewById(R.id.btnUpdate);
         ivCamera = view.findViewById(R.id.ivCamera);
 
         ivLogout.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +112,44 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tvUsername.setText(currentUser.getUsername());
+        String bio = currentUser.getString("bio");
+        if (bio != null)
+            tvBio.setText(bio);
+        else
+            tvBio.setText("[update bio here]");
+
+        tvBio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvBio.setVisibility(View.GONE);
+                etBio.setVisibility(View.VISIBLE);
+                btnUpdate.setVisibility(View.VISIBLE);
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String newBio = etBio.getText().toString();
+
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                currentUser.put("bio", newBio);
+                currentUser.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Log.d(TAG, "Updated bio successfully");
+                        }
+                    }
+                });
+                tvBio.setText(newBio);
+                tvBio.setVisibility(View.VISIBLE);
+                etBio.setVisibility(View.GONE);
+                btnUpdate.setVisibility(View.GONE);
+
+            }
+        });
+
 
         ParseFile profileImage = currentUser.getParseFile("profilepic");
         if (profileImage != null) {

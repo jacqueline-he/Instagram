@@ -35,14 +35,14 @@
 
 
         <ImageView
-            android:id="@+id/ivMessage"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/ivOptions"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="end"
             android:clickable="true"
             android:layout_marginEnd="20dp"
             android:tint="@color/black"
-            app:srcCompat="@drawable/ic_message"
+            app:srcCompat="@drawable/ic_options"
             android:focusable="true" />
 
     </androidx.appcompat.widget.Toolbar>

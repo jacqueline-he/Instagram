@@ -14,7 +14,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.example.instagram.MainActivity;
 import com.example.instagram.Post;
 import com.example.instagram.PostsAdapter;
 import com.example.instagram.R;
@@ -39,6 +41,8 @@ public class PostsFragment extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     boolean infScroll = false;
 
+    private ImageView ivCamera;
+
     public PostsFragment() {
         // Required empty public constructor
     }
@@ -57,12 +61,23 @@ public class PostsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         swipeContainer = view.findViewById(R.id.swipeContainer);
         rvPosts = view.findViewById(R.id.rvPosts);
+
+        ivCamera = view.findViewById(R.id.ivCamera);
+
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(getContext(), allPosts);
 
         linearLayoutManager = new LinearLayoutManager(getContext());
         rvPosts.setAdapter(adapter);
         rvPosts.setLayoutManager(linearLayoutManager);
+
+
+        ivCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).launchCamera();
+            }
+        });
 
         scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override

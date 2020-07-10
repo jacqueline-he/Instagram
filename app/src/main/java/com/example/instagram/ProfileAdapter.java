@@ -1,6 +1,7 @@
 package com.example.instagram;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
@@ -71,6 +73,19 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             ParseFile postImage = post.getImage();
             if (postImage != null)
                 Glide.with(context).load(postImage.getUrl()).apply(new RequestOptions().override(100, 100)).into(ivPostImage);
+
+            ivPostImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        Post post = posts.get(position);
+                        Intent intent = new Intent(context, PostDetailActivity.class);
+                        intent.putExtra("PostDetails", (Serializable) post);
+                        context.startActivity(intent);
+                    }
+                }
+            });
         }
     }
 }

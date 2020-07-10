@@ -51,6 +51,7 @@ public class OtherUserFragment extends Fragment {
     private GridLayoutManager gridLayoutManager;
     private ParseUser user;
     private TextView tvUsername;
+    private TextView tvBio;
     private ImageView ivProfileImage;
     private EndlessRecyclerViewScrollListener scrollListener;
     boolean infScroll = false;
@@ -73,6 +74,7 @@ public class OtherUserFragment extends Fragment {
         user = post.getUser();
         tvUsername = view.findViewById(R.id.tvUsername);
         ivProfileImage = view.findViewById(R.id.ivProfileImage);
+        tvBio = view.findViewById(R.id.tvBio);
         return view;
     }
 
@@ -80,7 +82,7 @@ public class OtherUserFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tvUsername.setText(user.getUsername());
-
+        tvBio.setText(user.getString("bio"));
         ParseFile profileImage = user.getParseFile("profilepic");
         if (profileImage != null) {
             Glide.with(this).load(profileImage.getUrl()).transform(new CircleCrop()).into(ivProfileImage);

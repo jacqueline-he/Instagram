@@ -44,11 +44,25 @@
         android:layout_height="30dp"
         android:layout_below="@+id/toolbar"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:textColor = "@color/black"
         android:textStyle="bold"
         android:layout_toEndOf="@+id/ivProfileImage"
         tools:text="username" />
+
+    <TextView
+        android:id="@+id/tvBio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUsername"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="0dp"
+        android:textStyle="normal"
+        android:textColor="@color/black"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:text="[insert bio here]"
+        />
 
 
     <androidx.recyclerview.widget.RecyclerView

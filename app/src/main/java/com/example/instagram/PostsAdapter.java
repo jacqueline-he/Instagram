@@ -214,28 +214,38 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     if (position != RecyclerView.NO_POSITION) {
                         Post post = posts.get(position);
                         try {
-                            if (post.isLiked()) {
-                                post.unlikePost();
-                                fabFavorite.clearColorFilter();
-                                fabFavorite.setImageResource(R.drawable.ic_likes);
-                            }
-                            else {
-                                post.likePost();
-                                Log.d("PostsAdapter", "in here!!!!!!!!!");
-                                fabFavorite.setImageResource(R.drawable.ic_likes_filled);
-                                fabFavorite.setColorFilter(context.getResources().getColor(R.color.medium_red));
+                           favorite(post);
 
-                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                         post.saveInBackground();
-                        tvLikes.setText(String.format("%d", post.getLikes().length()) + " likes");
-                        tvLikes.setVisibility(View.VISIBLE);
+
                     }
                 }
             });
+        }
+
+        private void favorite(Post post) throws JSONException {
+            if (post.isLiked()) {
+                post.unlikePost();
+                fabFavorite.clearColorFilter();
+                fabFavorite.setImageResource(R.drawable.ic_likes);
+            }
+            else {
+                post.likePost();
+                Log.d("PostsAdapter", "in here!!!!!!!!!");
+                fabFavorite.setImageResource(R.drawable.ic_likes_filled);
+                fabFavorite.setColorFilter(context.getResources().getColor(R.color.medium_red));
+
+            }
+            int likes = post.getLikes().length();
+            if (likes == 1)
+                tvLikes.setText(String.format("%d", 1) + " like");
+            else
+                tvLikes.setText(String.format("%d", likes) + " likes");
         }
 
         @Override
