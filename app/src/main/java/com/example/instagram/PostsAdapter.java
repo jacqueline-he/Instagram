@@ -38,6 +38,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     private Context context;
     private List<Post> posts;
+    int detailPosition = 0;
 
     public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
@@ -228,7 +229,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             });
         }
 
-        private void favorite(Post post) throws JSONException {
+        public void favorite(Post post) throws JSONException {
             if (post.isLiked()) {
                 post.unlikePost();
                 fabFavorite.clearColorFilter();
@@ -253,9 +254,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 Post post = posts.get(position);
-                Intent intent = new Intent(context, PostDetailActivity.class);
+                detailPosition = position;
+                Intent intent = new Intent((MainActivity) context, PostDetailActivity.class);
                 intent.putExtra("PostDetails", (Serializable) post);
-                context.startActivity(intent);
+                ((MainActivity) context).startActivityForResult(intent, 230);
             }
         }
     }

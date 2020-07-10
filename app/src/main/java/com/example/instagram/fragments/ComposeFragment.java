@@ -93,7 +93,7 @@ public class ComposeFragment extends Fragment {
         // RESIZE BITMAP, see section below
         // Load the taken image into a preview
         // ivPostImage.setImageBitmap(takenImage);
-        ivPostImage.setImageBitmap(rotateBitmap(takenImage, 90));
+        ivPostImage.setImageBitmap(rotateBitmap(takenImage, 0));
         // Glide.with(this).load(photoFile.getAbsolutePath()).into(ivPostImage);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {

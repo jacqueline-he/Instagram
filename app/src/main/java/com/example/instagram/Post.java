@@ -18,6 +18,7 @@ public class Post extends ParseObject implements Serializable {
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
     public static final String KEY_LIKES = "likes";
+    int numLikes;
 
     public Post() {
         super();
@@ -61,6 +62,11 @@ public class Post extends ParseObject implements Serializable {
     public void likePost() {
         add(KEY_LIKES, ParseUser.getCurrentUser());
     }
+
+    public void setNumLikes(int likes) {
+        numLikes = likes;
+    }
+
 
     public void unlikePost() {
         ArrayList<ParseUser> user = new ArrayList<ParseUser>();

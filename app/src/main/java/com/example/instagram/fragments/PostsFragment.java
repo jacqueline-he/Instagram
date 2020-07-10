@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.example.instagram.MainActivity;
 import com.example.instagram.Post;
 import com.example.instagram.PostsAdapter;
+import com.example.instagram.ProfileAdapter;
 import com.example.instagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -47,6 +48,14 @@ public class PostsFragment extends Fragment {
         // Required empty public constructor
     }
 
+
+    public PostsAdapter getAdapter() {
+        return adapter;
+    }
+
+    public List<Post> getPosts() {
+        return allPosts;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,8 +103,7 @@ public class PostsFragment extends Fragment {
         queryPosts();
     }
 
-
-    private void swipeToRefresh() {
+    public void swipeToRefresh() {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -109,7 +117,7 @@ public class PostsFragment extends Fragment {
         swipeContainer.setColorSchemeResources(R.color.medium_red);
     }
 
-    protected void queryPosts() {
+    public void queryPosts() {
         // Specify which class to query
         /*ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);

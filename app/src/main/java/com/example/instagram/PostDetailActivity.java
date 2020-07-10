@@ -1,5 +1,6 @@
 package com.example.instagram;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
@@ -53,6 +55,7 @@ public class PostDetailActivity extends AppCompatActivity {
     private CommentsAdapter adapter;
 
     boolean needsUpdate;
+    int numLikes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +88,7 @@ public class PostDetailActivity extends AppCompatActivity {
         tvDate.setText(getRelativeTimeAgo(post.getCreatedAt().toString()));
 
 
-        int likes = post.getLikes().length();
+        numLikes = post.getLikes().length();
         try {
             if (post.isLiked()) {
                 fabFavorite.setImageResource(R.drawable.ic_likes_filled);
@@ -101,10 +104,10 @@ public class PostDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if (likes == 1)
+        if (numLikes == 1)
             tvLikes.setText(String.format("%d", 1) + " like");
         else
-            tvLikes.setText(String.format("%d", likes) + " likes");
+            tvLikes.setText(String.format("%d", numLikes) + " likes");
 
 
         ParseFile profileImage = post.getUser().getParseFile("profilepic");
@@ -131,6 +134,7 @@ public class PostDetailActivity extends AppCompatActivity {
                         post.likePost();
                         fabFavorite.setImageResource(R.drawable.ic_likes_filled);
                         fabFavorite.setColorFilter(getResources().getColor(R.color.medium_red));
+
 
                     }
                 } catch (JSONException e) {
@@ -179,6 +183,12 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     public String getRelativeTimeAgo(String rawJsonDate) {

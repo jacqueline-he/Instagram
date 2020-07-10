@@ -26,7 +26,10 @@ import com.example.instagram.fragments.PostsFragment;
 import com.example.instagram.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONException;
+
 import java.io.File;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private File photoFile;
     private String photoFileName = "photo.jpg";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
+    Fragment fragment;
 
 
     @Override
@@ -61,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment fragment;
                 btnCapture.setVisibility(View.GONE);
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
@@ -147,6 +150,27 @@ public class MainActivity extends AppCompatActivity {
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
+        }
+
+        if (requestCode == 230) {
+            /*Post post = (Post) data.getParcelableExtra("post");
+            String objID = post.getObjectId();
+            int position = 0;
+            List<Post> allPosts = ((PostsFragment)fragment).getPosts();
+            PostsAdapter adapter = ((PostsFragment)fragment).getAdapter();
+            for (int i = 0; i < allPosts.size(); i++) {
+                if (objID.equals(allPosts.get(position).getObjectId()))
+                    position = i;
+            }
+            Log.d(TAG, "likes: " + post.getLikes());
+            allPosts.remove(position);
+            allPosts.add(position, post);
+            adapter.notifyItemChanged(position);*/
+            // ((PostsFragment)fragment).getAdapter().clear();
+            // ((PostsFragment)fragment).queryPosts();
+            int position = ((PostsFragment)fragment).getAdapter().detailPosition;
+            ((PostsFragment)fragment).getAdapter().clear();
+            ((PostsFragment)fragment).queryPosts();
         }
     }
 }
