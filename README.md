@@ -89,7 +89,7 @@ each query). Finally, the user then clicks into another user's profile, and is a
 on post images in the grid.  
   
   
-![Video 5](https://i.imgur.com/Ucq1p0W.gif)  
+Video 5: [https://i.imgur.com/Ucq1p0W.gif]
 
 Video 5 is an all-in-one demo that abbreviates the content covered in the other four videos. It shows a user signing up, taking a photo and posting it to instagram, viewing post details, liking and commenting, browsing other user profiles, setting up a user profile pic and bio, and login out. 
 
