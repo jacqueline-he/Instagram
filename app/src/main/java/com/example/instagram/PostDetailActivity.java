@@ -156,15 +156,10 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         });
 
-
-            // populateComments();
-
     }
 
     private void populateComments() {
         ParseQuery<Comment> query = new ParseQuery<>(Comment.class);
-        // query.whereEqualTo("post_id", post.getObjectId());
-        // query.include("user");
         query.whereEqualTo("post", post);
         query.addDescendingOrder("createdAt");
         query.findInBackground(new FindCallback<Comment>() {

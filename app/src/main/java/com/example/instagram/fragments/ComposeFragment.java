@@ -64,16 +64,6 @@ public class ComposeFragment extends Fragment {
 
         photoFile = (File) getArguments().getSerializable("File");
 
-        /*btnCaptureImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchCamera();
-            }
-        });*/
-
-        // queryPosts();
-
-
 
         // by this point we have the camera photo on disk
         Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());

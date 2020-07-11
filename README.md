@@ -88,6 +88,9 @@ scrolls to the bottom of the feed where more posts are loaded using infinite scr
 each query). Finally, the user then clicks into another user's profile, and is able to view post details by clicking
 on post images in the grid.  
   
+  
+
+Video 5 is an all-in-one demo that abbreviates the content covered in the other four videos. It shows a user signing up, taking a photo and posting it to instagram, viewing post details, liking and commenting, browsing other user profiles, setting up a user profile pic and bio, and login out. 
 
 GIF created with [Kap](http://getkap.co/).
 

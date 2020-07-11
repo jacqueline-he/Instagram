@@ -85,9 +85,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null) {
-                    // TODO better error handling
                     Log.e(TAG, "Issue with login", e);
-                    Toast.makeText(LoginActivity.this, "Issue with login", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Username not recognized", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 goMainActivity();

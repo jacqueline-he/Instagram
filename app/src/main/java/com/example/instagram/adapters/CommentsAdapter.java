@@ -65,7 +65,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder  {
         TextView tvUsername;
         TextView tvContent;
         private ImageView ivProfileImage;
@@ -75,22 +75,8 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
             tvUsername = itemView.findViewById(R.id.tvUsername);
             tvContent = itemView.findViewById(R.id.tvContent);
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            int position = getAdapterPosition();
-            if (position != RecyclerView.NO_POSITION) {
-               /* Comment comment = comments.get(position);
-                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-                Fragment fragment = new OtherUserFragment();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("", post);
-                fragment.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();*/
-            }
-        }
 
         public void bind(Comment comment) throws ParseException {
             Log.i("bind", "comment contents: " + comment.getContent());

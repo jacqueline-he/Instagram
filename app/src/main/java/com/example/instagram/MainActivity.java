@@ -68,13 +68,10 @@ public class MainActivity extends AppCompatActivity {
                 btnCapture.setVisibility(View.GONE);
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
-                        // Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
                         fragment = new PostsFragment();
                         fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
                         break;
                     case R.id.action_capture:
-                        // Toast.makeText(MainActivity.this, "Compose!", Toast.LENGTH_SHORT).show();
-                        // fragment = new ComposeFragment();
                         if (!btnClicked)
                             btnCapture.setVisibility(View.VISIBLE);
                         else
@@ -83,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_profile:
                     default:
-                        // Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
                         fragment = new ProfileFragment();
                         fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
                         break;
